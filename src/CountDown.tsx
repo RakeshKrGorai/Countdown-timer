@@ -36,12 +36,12 @@ export default function CountDown() {
     setInterval(function () {
       // setTime(time - 1);
       setSeconds((currentSecond) => currentSecond - 1);
+      setIsFoldingSeconds(!isFoldingSeconds);
       if (seconds === 0) {
-        setIsFoldingSeconds(true);
+        setIsFoldingMinutes(!isFoldingMinutes);
         setMinutes((currentMinutes) => currentMinutes - 1);
       }
       if (minutes === 0) {
-        setIsFoldingMinutes(true);
         setHours((currentHours) => currentHours - 1);
       }
       if (hours === 0) {
