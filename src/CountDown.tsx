@@ -5,26 +5,50 @@ export default function CountDown() {
   const today = new Date().getTime();
   const difference = countDownDate - today; //The main thing that will help us calculate the big day's numbers
 
-  const seconds = 1000;
-  const minutes = seconds * 60;
-  const hours = minutes * 60;
-  const days = hours * 24;
+  const secondsValue = 1000;
+  const minutesValue = secondsValue * 60;
+  const hoursValue = minutesValue * 60;
+  const daysValue = hoursValue * 24;
 
-  const daysLeft = Math.floor(difference / days); //basically doing total number of seconds given/86400, which is the total no of seconds in a day
+  const daysLeft = Math.floor(difference / daysValue); //basically doing total number of seconds given/86400, which is the total no of seconds in a day
 
-  const hoursLeft = Math.floor((difference % days) / hours); // after calculating total number of days, those seconds which got considered in the calculation of day shouldn't be considered, so the total hours is getting calculated from the remainder of the value after days got calculated
+  const hoursLeft = Math.floor((difference % daysValue) / hoursValue); // after calculating total number of days, those seconds which got considered in the calculation of day shouldn't be considered, so the total hours is getting calculated from the remainder of the value after days got calculated
 
-  const minutesLeft = Math.floor(((difference % days) % hours) / minutes); //sane logic as above, remainder after hours got calculated, and then minutes were calculated
+  const minutesLeft = Math.floor(
+    ((difference % daysValue) % hoursValue) / minutesValue
+  ); //sane logic as above, remainder after hours got calculated, and then minutes were calculated
 
   const secondsLeft = Math.floor(
-    (((difference % days) % hours) % minutes) / seconds
+    (((difference % daysValue) % hoursValue) % minutesValue) / secondsValue
   ); //same logic as above
 
-  const [time, setTime] = useState(seconds);
+  // const [time, setTime] = useState(secondsValue);
+  const [folding, setFolding] = useState(false);
+  const [days, setDays] = useState(daysValue);
+  const [hours, setHours] = useState(hoursValue);
+  const [minutes, setMinutes] = useState(minutesValue);
+  const [seconds, setSeconds] = useState(secondsValue);
 
   useEffect(function () {
     setInterval(function () {
-      setTime(time - 1);
+      // setTime(time - 1);
+      setSeconds((currentSecond) => currentSecond - 1);
+      if (seconds === 0) {
+        setMinutes((currentMinutes) => currentMinutes - 1);
+        setFolding(!folding);
+      }
+      if (minutes === 0) {
+        setHours((currentHours) => currentHours - 1);
+        setFolding(true);
+      }
+      if (hours === 0) {
+        setDays((currentDay) => currentDay - 1);
+        setFolding(true);
+      }
+      if (days === 0) {
+        return;
+      }
+      setFolding(!folding);
     }, 1000);
   });
   return (
@@ -32,25 +56,25 @@ export default function CountDown() {
       <h1 className="title">Time left for the Big Day</h1>
       <div className="count-down">
         <div className="day-container">
-          <h3 className="days card">
+          <h3 className={`days card  ${folding ? "fold" : ""}`}>
             {daysLeft <= 9 ? "0" + daysLeft : daysLeft}
           </h3>
           <h3 className="time-type"> DAYS</h3>
         </div>
-        <div className="hour-container">
-          <h3 className="hours card">
+        <div className={`hour-container `}>
+          <h3 className={`hours card ${folding ? "fold" : ""}`}>
             {hoursLeft <= 9 ? "0" + hoursLeft : hoursLeft}
           </h3>
           <h3 className="time-type"> HOURS</h3>
         </div>
-        <div className="minute-container">
-          <h3 className="minutes card">
+        <div className={`minute-container `}>
+          <h3 className={`minutes card ${folding ? "fold" : ""}`}>
             {minutesLeft <= 9 ? "0" + minutesLeft : minutesLeft}
           </h3>
           <h3 className="time-type"> MINUTES</h3>
         </div>
         <div className="second-container">
-          <h3 className="seconds card">
+          <h3 className={`seconds card ${folding ? "fold" : ""}`}>
             {secondsLeft <= 9 ? "0" + secondsLeft : secondsLeft}
           </h3>
           <h3 className="time-type"> SECONDS</h3>
@@ -59,3 +83,4 @@ export default function CountDown() {
     </div>
   );
 }
+3;

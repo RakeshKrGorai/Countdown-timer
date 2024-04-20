@@ -7,14 +7,15 @@
   color: #fff;
 }
 
-.card {
-  height: 200px;
-  width: 200px;
-  border-radius: 20px;
-  background-image: url(./assets/card-top.svg), url(./assets/card-bottom.svg);
+body {
+  background-image: url(./assets/pattern-hills.svg), url(./assets/bg-stars.svg);
+  background-position: bottom;
   background-repeat: no-repeat;
-  background-position: top, bottom;
-  background-size: 210px;
+  background-size: contain;
+  min-height: 100vh;
+  background-color: #201e29;
+  overflow: hidden;
+  font-family: "Noto Sans", sans-serif;
 }
 
 .title {
@@ -25,15 +26,27 @@
   padding: 20px 0;
 }
 
-body {
-  background-image: url(./assets/pattern-hills.svg), url(./assets/bg-stars.svg);
-  background-position: bottom;
+.card {
+  height: 200px;
+  width: 200px;
+  border-radius: 20px;
+  background-image: url(./assets/card-top.svg), url(./assets/card-bottom.svg);
   background-repeat: no-repeat;
-  background-size: contain;
-  min-height: 100vh;
-  background-color: #201e29;
-  overflow: hidden;
-  font-family: "Noto Sans", sans-serif;
+  background-position: top, bottom;
+  background-size: 210px;
+}
+
+.fold {
+  animation: fold 1s ease-in-out forwards;
+}
+
+@keyframes fold {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateX(-90deg);
+  }
 }
 
 .time-type {
@@ -61,9 +74,19 @@ body {
 .hours,
 .minutes,
 .seconds {
-  font-size: 115px;
+  font-size: 130px;
   margin: 20px 20px;
   color: #f65d84;
+}
+
+.countdown-timer-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the element */
+  background-color: #fff; /* White line */
+  width: 100%; /* Full width of container */
+  height: 2px; /* Line thickness */
 }
 
 .day-container,
