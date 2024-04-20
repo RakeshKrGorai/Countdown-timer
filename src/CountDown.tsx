@@ -23,7 +23,10 @@ export default function CountDown() {
   ); //same logic as above
 
   // const [time, setTime] = useState(secondsValue);
-  const [folding, setFolding] = useState(false);
+  const [isFoldingSeconds, setIsFoldingSeconds] = useState(false);
+  const [isFoldingMinutes, setIsFoldingMinutes] = useState(false);
+  const [isFoldingHours, setIsFoldingHours] = useState(false);
+  const [isFoldingDays, setIsFoldingDays] = useState(false);
   const [days, setDays] = useState(daysValue);
   const [hours, setHours] = useState(hoursValue);
   const [minutes, setMinutes] = useState(minutesValue);
@@ -34,21 +37,20 @@ export default function CountDown() {
       // setTime(time - 1);
       setSeconds((currentSecond) => currentSecond - 1);
       if (seconds === 0) {
+        setIsFoldingSeconds(true);
         setMinutes((currentMinutes) => currentMinutes - 1);
-        setFolding(!folding);
       }
       if (minutes === 0) {
+        setIsFoldingMinutes(true);
         setHours((currentHours) => currentHours - 1);
-        setFolding(true);
       }
       if (hours === 0) {
+        setIsFoldingDays(true);
         setDays((currentDay) => currentDay - 1);
-        setFolding(true);
       }
       if (days === 0) {
         return;
       }
-      setFolding(!folding);
     }, 1000);
   });
   return (
@@ -56,25 +58,25 @@ export default function CountDown() {
       <h1 className="title">Time left for the Big Day</h1>
       <div className="count-down">
         <div className="day-container">
-          <h3 className={`days card  ${folding ? "fold" : ""}`}>
+          <h3 className={`days card  ${isFoldingDays ? "fold" : ""}`}>
             {daysLeft <= 9 ? "0" + daysLeft : daysLeft}
           </h3>
           <h3 className="time-type"> DAYS</h3>
         </div>
         <div className={`hour-container `}>
-          <h3 className={`hours card ${folding ? "fold" : ""}`}>
+          <h3 className={`hours card ${isFoldingHours ? "fold" : ""}`}>
             {hoursLeft <= 9 ? "0" + hoursLeft : hoursLeft}
           </h3>
           <h3 className="time-type"> HOURS</h3>
         </div>
         <div className={`minute-container `}>
-          <h3 className={`minutes card ${folding ? "fold" : ""}`}>
+          <h3 className={`minutes card ${isFoldingMinutes ? "fold" : ""}`}>
             {minutesLeft <= 9 ? "0" + minutesLeft : minutesLeft}
           </h3>
           <h3 className="time-type"> MINUTES</h3>
         </div>
         <div className="second-container">
-          <h3 className={`seconds card ${folding ? "fold" : ""}`}>
+          <h3 className={`seconds card ${isFoldingSeconds ? "fold" : ""}`}>
             {secondsLeft <= 9 ? "0" + secondsLeft : secondsLeft}
           </h3>
           <h3 className="time-type"> SECONDS</h3>
@@ -83,4 +85,3 @@ export default function CountDown() {
     </div>
   );
 }
-3;
