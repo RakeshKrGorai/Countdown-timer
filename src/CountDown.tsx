@@ -34,10 +34,11 @@ export default function CountDown() {
   useEffect(function () {
     setInterval(function () {
       // setTime(time - 1);
-      setIsFoldingSeconds(!isFoldingSeconds);
       setSeconds((currentSecond) => currentSecond - 1);
+      setIsFoldingSeconds(true);
       if (seconds === 0) {
         setIsFoldingMinutes(true);
+        console.log("YO");
         setMinutes((currentMinutes) => currentMinutes - 1);
       }
       setIsFoldingMinutes(false);
@@ -55,14 +56,17 @@ export default function CountDown() {
         return;
       }
     }, 1000);
-  });
+  }, []);
 
   return (
     <div className="coming-soon">
       <h1 className="title">Time left for the Big Day</h1>
       <div className="count-down">
         <div className="day-container">
-          <h3 className={`days card  ${isFoldingDays ? "fold" : ""}`}>
+          <h3
+            className={`days card  ${isFoldingDays ? "fold" : ""}`}
+            onAnimationEnd={() => setIsFoldingDays(false)}
+          >
             {daysLeft <= 9 ? "0" + daysLeft : daysLeft}
           </h3>
           <h3 className="time-type"> DAYS</h3>
@@ -77,7 +81,10 @@ export default function CountDown() {
           <h3 className="time-type"> HOURS</h3>
         </div>
         <div className={`minute-container `}>
-          <h3 className={`minutes card ${isFoldingMinutes ? "fold" : ""}`}>
+          <h3
+            className={`minutes card ${isFoldingMinutes ? "fold" : ""}`}
+            onAnimationEnd={() => setIsFoldingMinutes(false)}
+          >
             {minutesLeft <= 9 ? "0" + minutesLeft : minutesLeft}
           </h3>
           <h3 className="time-type"> MINUTES</h3>

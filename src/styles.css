@@ -37,7 +37,7 @@ body {
 }
 
 .fold {
-  animation: fold 1s ease-in-out forwards;
+  animation: fold 0.9s ease-in-out forwards;
   transform: perspective(1000px) rotateX(0deg);
 }
 
