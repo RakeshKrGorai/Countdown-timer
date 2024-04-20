@@ -38,6 +38,7 @@ body {
 
 .fold {
   animation: fold 1s ease-in-out forwards;
+  transform: perspective(1000px) rotateX(0deg);
 }
 
 @keyframes fold {
@@ -45,7 +46,7 @@ body {
     transform: rotateX(0deg);
   }
   to {
-    transform: rotateX(-90deg);
+    transform: rotateX(90deg);
   }
 }
 

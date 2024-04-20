@@ -22,7 +22,6 @@ export default function CountDown() {
     (((difference % daysValue) % hoursValue) % minutesValue) / secondsValue
   ); //same logic as above
 
-  // const [time, setTime] = useState(secondsValue);
   const [isFoldingSeconds, setIsFoldingSeconds] = useState(false);
   const [isFoldingMinutes, setIsFoldingMinutes] = useState(false);
   const [isFoldingHours, setIsFoldingHours] = useState(false);
@@ -35,24 +34,29 @@ export default function CountDown() {
   useEffect(function () {
     setInterval(function () {
       // setTime(time - 1);
+      setIsFoldingSeconds(true);
       setSeconds((currentSecond) => currentSecond - 1);
-      setIsFoldingSeconds(!isFoldingSeconds);
       if (seconds === 0) {
-        setIsFoldingMinutes(!isFoldingMinutes);
+        setIsFoldingMinutes(true);
         setMinutes((currentMinutes) => currentMinutes - 1);
       }
-      if (minutes === 0) {
+      setIsFoldingMinutes(false);
+      if (minutes === 0 && seconds === 0) {
+        setIsFoldingHours(true);
         setHours((currentHours) => currentHours - 1);
       }
-      if (hours === 0) {
+      setIsFoldingHours(false);
+      if (hours === 0 && minutes === 0 && seconds === 0) {
         setIsFoldingDays(true);
         setDays((currentDay) => currentDay - 1);
       }
+      setIsFoldingDays(false);
       if (days === 0) {
         return;
       }
     }, 1000);
   });
+
   return (
     <div className="coming-soon">
       <h1 className="title">Time left for the Big Day</h1>
@@ -64,7 +68,10 @@ export default function CountDown() {
           <h3 className="time-type"> DAYS</h3>
         </div>
         <div className={`hour-container `}>
-          <h3 className={`hours card ${isFoldingHours ? "fold" : ""}`}>
+          <h3
+            className={`hours card ${isFoldingHours ? "fold" : ""}`}
+            onAnimationEnd={() => setIsFoldingHours(false)}
+          >
             {hoursLeft <= 9 ? "0" + hoursLeft : hoursLeft}
           </h3>
           <h3 className="time-type"> HOURS</h3>
@@ -76,7 +83,10 @@ export default function CountDown() {
           <h3 className="time-type"> MINUTES</h3>
         </div>
         <div className="second-container">
-          <h3 className={`seconds card ${isFoldingSeconds ? "fold" : ""}`}>
+          <h3
+            className={`seconds card ${isFoldingSeconds ? "fold" : ""}`}
+            onAnimationEnd={() => setIsFoldingSeconds(false)}
+          >
             {secondsLeft <= 9 ? "0" + secondsLeft : secondsLeft}
           </h3>
           <h3 className="time-type"> SECONDS</h3>
