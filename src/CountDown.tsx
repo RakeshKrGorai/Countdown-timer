@@ -34,7 +34,7 @@ export default function CountDown() {
   useEffect(function () {
     setInterval(function () {
       // setTime(time - 1);
-      setIsFoldingSeconds(true);
+      setIsFoldingSeconds(!isFoldingSeconds);
       setSeconds((currentSecond) => currentSecond - 1);
       if (seconds === 0) {
         setIsFoldingMinutes(true);
