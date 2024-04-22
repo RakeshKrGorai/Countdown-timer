@@ -30,7 +30,7 @@ export default function TimeContainer({
     secondFlip = false;
   }
 
-  if (hours == 0 && minutes == 0 && seconds == 0) {
+  if (hours == 0) {
     if (days != 0) {
       hours = 23;
     }
@@ -39,7 +39,7 @@ export default function TimeContainer({
     minuteFlip = true;
     secondFlip = true;
   }
-  if (minutes == 0 && seconds == 0) {
+  if (minutes == 0) {
     if (hours != 0) {
       minutes = 59;
     }

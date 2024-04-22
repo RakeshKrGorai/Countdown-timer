@@ -3,7 +3,6 @@ import TimeContainer from "./TimerContainer";
 
 export default function CountDown() {
   const countDownDate = new Date("January 1,2025 00:00:00").getTime(); //getTime stores the time in milliseconds since Jan 1, 1970
-
   const [days, setDays] = useState<number>(0);
   const [hours, setHours] = useState<number>(0);
   const [minutes, setMinutes] = useState<number>(0);
@@ -32,6 +31,7 @@ export default function CountDown() {
       ); //same logic as above
 
       setSeconds(secondsLeft);
+
       setMinutes(minutesLeft);
       setHours(hoursLeft);
       setDays(daysLeft);
