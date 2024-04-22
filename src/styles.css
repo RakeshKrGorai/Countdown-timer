@@ -1,7 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 * {
   color: #fff;
@@ -53,6 +50,7 @@ body {
 .time-type {
   font-size: 20px;
   letter-spacing: 5px;
+  text-transform: uppercase;
 }
 
 .coming-soon {
@@ -71,31 +69,16 @@ body {
   margin: 0px;
 }
 
-.days,
-.hours,
-.minutes,
-.seconds {
+.component {
   font-size: 130px;
   margin: 20px 20px;
   color: #f65d84;
 }
 
-.countdown-timer-line {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the element */
-  background-color: #fff; /* White line */
-  width: 100%; /* Full width of container */
-  height: 2px; /* Line thickness */
-}
-
-.day-container,
-.hour-container,
-.minute-container,
-.second-container {
+.container {
   padding: 30px 35px;
 }
+
 @media only screen and (min-height: 400px) and (max-width: 1000px) {
   body {
     min-height: 98vh;
